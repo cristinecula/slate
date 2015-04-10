@@ -27,8 +27,10 @@ under the License.
     $(".lang-selector a[data-language-name='" + language + "']").addClass('active');
     for (var i=0; i < languages.length; i++) {
       $(".highlight." + languages[i]).parent().hide();
+      $('.code-annotation.' + languages[i]).hide();
     }
     $(".highlight." + language).parent().show();
+    $('.code-annotation.' + language).show();
 
     global.toc.calculateHeights();
 
