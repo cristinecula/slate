@@ -2,6 +2,8 @@
 
 Widgetic uses API keys to allow access to the API. You can register a new API key at our [developer portal](https://widgetic.com/developers). 
 
+> Initializing the SDK
+
 ```js
 // initialize Widgetic with your api key and a redirect uri
 Widgetic.init('<api key>','<redirect uri>');
@@ -16,6 +18,8 @@ To use the Widgetic.js SDK you must first initialize it with your API key and re
 You can use Widgetic.js to connect your users to their Widgetic accounts. This allows you to access and manage their widgets and customizations, plus other features available through the API. The authentication and authorization protocol is based on OAuth2.
 
 ### Interactive login 
+
+> Triggering login on button click
 
 ```js
 $('button').on('click', function(){
@@ -34,7 +38,7 @@ $('button').on('click', function(){
 }) 
 ```
 
-> <p class="code-annotation javascript">Example success response:</p>
+> Example response
 
 ```js
 successResponse = {
@@ -52,6 +56,8 @@ The Javascript SDK has the `Widgetic.auth` function that initiates and handles t
 ---
 
 ### Non-Interactive login
+
+> Trying a background login
 
 ```js
 Widgetic.auth(false).then(
