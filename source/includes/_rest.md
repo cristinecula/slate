@@ -2,7 +2,11 @@
 
 ## User
 
+You can get profile information about the current authenticated user. You can also create and work with managed user accounts, to [allow white-label integration](#white-label-integration).
+
 ### Get User info
+
+> Getting the logged in user's info
 
 ```js
 Widgetic.api('users/me')
@@ -21,15 +25,25 @@ Widgetic.api('users/me')
 }
 ```
 
-Retrieve information about the logged in user. Useful for "Sign in with Widgetic" functionality.
+Retrieve information about the logged in user. Useful for "Sign in with Widgetic" functionality. By default the response is limited to their Widgetic unique ID and their username. To get the email info you must request the [`email` scope](#scopes) during the authorization step.
 
 #### HTTP Request
 
 `GET /api/v2/users/me`
 
+### Managed Users
+
+<span class="todo">Coming soon</span>
+
 ## Widgets
 
-### Widget Schema
+<span class="todo">Needs improving</span>
+
+Widgets are the 
+
+### Widget schema
+
+> The widget schema
 
 ```json
 {
@@ -57,6 +71,8 @@ Retrieve information about the logged in user. Useful for "Sign in with Widgetic
   }
 ```
 
+The schema
+
 Field       | Description
 ----------- | -----------
 id          | The unique identifier of the resource
@@ -73,14 +89,18 @@ css         |
 module      |
 js          |
 
+### Content schema
+
 ---
 
 ### Get all widgets
 
+> Getting the list of widgets' names
+
 ```js
-Widgetic.api('widgets', {'max-results': 3, 'fields': ['name', 'skins']})
+Widgetic.api('widgets', {'fields': ['name']})
     .then(function(widgets) {
-        console.log(widgets[0].name);
+        console.log(widgets);
     })
 ```
 
@@ -102,6 +122,8 @@ sort-by     | A field to sort the results by
 
 ### Get a widget
 
+> Getting the name of a widget
+
 ```js
 Widgetic.api('widgets/5195f3ec1d8a0c7a17000000')
     .then(function(widget) {
@@ -119,14 +141,20 @@ Get a widget by id.
 
 ### Get all skins and presets
 
+> Getting the names of a widget's skins
+
 ```js
-Widgetic.api('skins', {widget_id: '5108dcefe599d12e6f000000'})
+Widgetic.api('skins', {widget_id: '542173f409c7e222028b4568'})
     .then(function(skins) {
-        console.log('You have ' + skins.length + ' skins available!');
+        skins.map(function(skin) {
+            console.log(skin.name, skin.id)
+        })
     })
 ```
 
 Get all the skins and presets for a given widget.
+
+Preset id's have the widget id concatenated to it's own id: `id_widgetId`
 
 #### HTTP Request
 
@@ -142,9 +170,9 @@ widget_id   | The widget id to filter the skins
 
 ### Save a new skin
 
-```js
-// Get an existing skin (preset) to act as a base
+> Creating a new skin, using a preset as the base
 
+```js
 // request the widgets' skins
 Widgetic.api('skins', {widget_id: '5108dcefe599d12e6f000000'})
     .then(function(skins) {
@@ -155,8 +183,10 @@ Widgetic.api('skins', {widget_id: '5108dcefe599d12e6f000000'})
         skin.name = "My red skin";
         skin.backgroundcolor = "#ff0000";
 
+        // send the api request
         return Widgetic.api('skins', 'POST', JSON.stringify(skin));
     }).then(function(skin) {
+        // use the saved skin
         console.log('Skin ' + skin.id + ' saved!');
     })
 ```
@@ -173,10 +203,10 @@ The response is a skin object with the data that was sent to the API and the new
 
 ### Get a skin
 
-```js
-// Get the details of the previously created skin
+> Getting the details of a previously created skin
 
-Widgetic.api('skins/' + mySkin.id)
+```js
+Widgetic.api('skins/5108dcefe599d12e6f000000')
     .then(function(skin) {
         console.log('This is the ' + skin.name + ' skin.');
     })
@@ -192,9 +222,9 @@ Get a skin from the server by referencing it by it's id.
 
 ### Update a skin
 
-```js
-// Update a property of the previously created skin
+> Updating a previously saved skin
 
+```js
 var mySkin = { id: "553622bb09c7e25d158b4571" };
 var resourceURL = 'skins/' + mySkin.id;
 
@@ -203,11 +233,9 @@ Widgetic.api(resourceURL).then(function(skin) {
         mySkin = skin;
         // change skin properties
         mySkin.name = "My edited skin";
-        // issue a PUT action to update the skin
+        // issue a PUT request to update the skin
         return Widgetic.api(resourceURL, 'PUT', JSON.stringify(mySkin));
     }).then(function(skin) {
-        // you can use promise chaining
-        // to get the response of the second API call
         console.log('The skin is now called ' + skin.name + '!');
     })
 ```
@@ -221,6 +249,8 @@ To update a skin you must send a `PUT` http request with the full representation
 ---
 
 ### Delete a skin
+
+> Deleting a skin
 
 ```js
 Widgetic.api('skins/' + mySkin.id, 'DELETE')
@@ -240,6 +270,8 @@ To delete a skin, you must issue a `DELETE` http request.
 Compositions are resources linking a widget with a skin and user provided content.
 
 ### Get all compositions
+
+> Getting the compositions list
 
 ```js
 Widgetic.api('compositions', {widget_id: '51d57c5a1d8a0cee4a000000'})
@@ -263,6 +295,8 @@ widget_id   | The widget id to filter the compositions
 ---
 
 ### Create a new composition
+
+> Creating a new composition
 
 ```js
 var newComp = {
@@ -298,7 +332,9 @@ Create a composition.
 
 ---
 
-### Get an existing composition
+### Get a composition
+
+> Getting the name of a composition
 
 ```js
 Widgetic.api('compositions/553758d509c7e2334a8b458a')
@@ -315,7 +351,9 @@ Get a composition by it's id.
 
 ---
 
-### Update an existing composition
+### Update a composition
+
+> Updating a composition
 
 ```js
 // get the composition resource
@@ -341,10 +379,11 @@ Update an existing compositions' properties.
 
 ---
 
-### Delete an existing composition
+### Delete a composition
+
+> Deleting a composition
 
 ```js
-// get the composition resource
 Widgetic.api('compositions/553758d509c7e2334a8b458a', 'DELETE')
     .then(function() { 
         console.log('The composition has been deleted!')
@@ -354,6 +393,8 @@ Widgetic.api('compositions/553758d509c7e2334a8b458a', 'DELETE')
 ```
 
 Delete an existing composition.
+
+<aside class="notice warning">The <code>DELETE</code> request does not validate if the composition is embedded. Embedded compositions will stop working. Be sure to remove all embeds before deleting a composition.</aside>
 
 #### HTTP Request
 

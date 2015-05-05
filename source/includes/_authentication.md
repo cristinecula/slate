@@ -1,6 +1,10 @@
 # Getting started
 
-Widgetic uses API keys to allow access to the API. You can register a new API key at our [developer portal](https://widgetic.com/developers). 
+> Including the javascript SDK
+
+```html
+<script src="https://widgetic.com/sdk/sdk.js"></script>
+```
 
 > Initializing the SDK
 
@@ -9,8 +13,10 @@ Widgetic uses API keys to allow access to the API. You can register a new API ke
 Widgetic.init('<api key>','<redirect uri>');
 ```
 
+Widgetic uses API keys to allow access to the REST API. You can register a new app and get an API key at our [developer portal](https://widgetic.com/developers). 
+
 <p class="code-annotation javascript">
-To use the Widgetic.js SDK you must first initialize it with your API key and redirect URI. The API key is provided on the developer portal. The redirect URI must point to a webpage on your domain that includes the widgetic.js sdk. This could be your homepage or an empty html page created for this purpose.
+To interact with the REST API using the Widgetic.js SDK, it must first be initialized with your API key and redirect URI. The API key is provided on the developer portal. The redirect URI must point to a webpage on your domain that includes the widgetic.js SDK. This could be your homepage or an empty html page created for this purpose.
 </p>
 
 ## Authentication and authorization
@@ -79,7 +85,9 @@ If you pass `true` to `Widgetic.auth`, the SDK will try a 'non-interactive login
 
 ### Scopes
 
-<aside class="warning">Documentation incomplete.</aside>
+<span class="todo">Needs improving</span>
+
+> Requesting additional scopes
 
 ```js
 Widgetic.auth(true, ['email', 'skins']);
@@ -93,7 +101,9 @@ Available scopes:
 
 ## API calls
 
-<aside class="warning">Documentation incomplete.</aside>
+<span class="todo">Needs improving</span>
+
+> Example of an api call
 
 ```js
 Widgetic.api('users/me').then(function(user) {
