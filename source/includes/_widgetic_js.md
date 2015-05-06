@@ -4,7 +4,9 @@ Widgetic.js is our javascript SDK which enables advanced widget features (popups
 
 ## Examples
 ### Embed a widget
+#### Embed resize options
 ### Change the skin
 ### Change the content
+### Embedding the editor
 
 ## Reference
