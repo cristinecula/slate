@@ -450,7 +450,11 @@ html, body {
     }
 
     td {
-      padding: 10px;
+      padding: 5px 10px;
+    }
+
+    td:first-child {      
+      text-align: right;
     }
 
     tr:last-child {
