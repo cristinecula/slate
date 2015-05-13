@@ -500,6 +500,10 @@ html, body {
     padding: 0;
   }
 
+  pre + pre {
+    margin: 20px 0;
+  }
+  
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -606,6 +610,15 @@ html, body {
     background: transparent;
     padding: 1em 20px;
   }
+}
+
+.live-example {
+  width: 51%;
+  float: right;
+  clear: right;
+  background: $code-bg;
+  margin: 20px 0;
+  border: none;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

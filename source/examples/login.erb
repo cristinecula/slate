@@ -1,0 +1,16 @@
+---
+layout: examples
+---
+
+<button>Login</button>
+<p> Hello <span>visitor</span>! </p>
+<script>
+  $('button').on('click', function() {
+    Widgetic.auth()
+      .then(function() {
+        return Widgetic.api('users/me')
+      }).then(function(user) {
+        $('span').text(user.username)
+      })
+  })
+</script>
