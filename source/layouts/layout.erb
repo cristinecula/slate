@@ -110,6 +110,19 @@ under the License.
         <% end %>
       </div>
     </div>
-    <script>iFrameResize({log:true})</script>
+    <script>
+      iFrameResize()
+      $('iframe.live-example').each(function() {
+        var $this = $(this)
+        var $button = $('<button>Re-run</button>');
+
+        $this.wrap('<div class="live-example_wrapper">');
+        $this.after($button);
+        
+        $button.on('click', function() {
+          this.contentDocument.location.reload(true)
+        }.bind(this));
+      })
+    </script>
   </body>
 </html>

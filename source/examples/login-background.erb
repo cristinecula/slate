@@ -2,7 +2,7 @@
 layout: examples
 ---
 
-<button>Login with Widgetic!</button>
+<button style="display:none">Login with Widgetic!</button>
 <p style="display:none"> Hello <span>visitor</span>! </p>
 
 <script>
@@ -21,10 +21,18 @@ var showError = function() {
   alert('Login failed');
 }
 
-$('button').on('click', function() {
-  Widgetic.auth()
-    .then(hideButton)
-    .then(showUsername)
-    .fail(showError)
-})
+var showButton = function() {
+  $('button').show().on('click', function() {
+    Widgetic.auth()
+      .then(hideButton)
+      .then(showUsername)
+      .fail(showError)
+  });  
+}
+
+Widgetic.auth(false)
+  .then(hideButton)
+  .then(showUsername)
+  .fail(showButton)
+
 </script>
