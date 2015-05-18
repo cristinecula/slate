@@ -1,0 +1,30 @@
+---
+layout: examples
+---
+
+<button>Login with Widgetic!</button>
+<p style="display:none"> Hello <span>visitor</span>! </p>
+
+<script>
+var hideButton = function() {
+  $('button').off('click').hide();
+}
+
+var showUsername = function() {
+  $('p').show();
+  Widgetic.api('users/me').then(function(user) {
+    $('span').text(user.username);
+  })
+}
+
+var showError = function() {
+  alert('Login failed');
+}
+
+$('button').on('click', function() {
+  Widgetic.auth()
+    .then(hideButton)
+    .then(showUsername)
+    .fail(showError)
+})
+</script>

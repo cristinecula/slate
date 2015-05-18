@@ -25,6 +25,8 @@ under the License.
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <%= javascript_include_tag  "bower/iframe-resizer/js/iframeResizer.min" %>
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>
     <% else %>
@@ -108,5 +110,19 @@ under the License.
         <% end %>
       </div>
     </div>
+    <script>
+      iFrameResize()
+      $('iframe.live-example').each(function() {
+        var $this = $(this)
+        var $button = $('<button>Re-run</button>');
+
+        $this.wrap('<div class="live-example_wrapper">');
+        $this.after($button);
+        
+        $button.on('click', function() {
+          this.contentDocument.location.reload(true)
+        }.bind(this));
+      })
+    </script>
   </body>
 </html>

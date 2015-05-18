@@ -500,6 +500,10 @@ html, body {
     padding: 0;
   }
 
+  pre + pre {
+    margin: 20px 0;
+  }
+
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -606,6 +610,26 @@ html, body {
     background: transparent;
     padding: 1em 20px;
   }
+}
+
+.live-example {
+  width: 100%;
+  background: $code-bg;
+  margin: 0 0 20px 0;
+  border: none;
+}
+
+.live-example_wrapper {
+  position: relative;
+  width: 51%;
+  float: right;
+  clear: right;
+}
+
+.live-example_wrapper button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
