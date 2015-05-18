@@ -145,6 +145,8 @@ Get a widget by id.
 
 ## Skins
 
+The look of all widgets can be customized by use of widget `skins`. Each widget has it's own customizable properties, defined in the [skin meta](#the-skin-meta).
+
 ### Presets
 
 > Getting a widget's presets
@@ -165,11 +167,69 @@ Widgetic.api('skins', {widget_id: widgetId})
     })
 ```
 
-Pre-made skins that are created by the Widgetic staff for each widget. You can choose to use any of them for your embeds or use them as a base for your own customizations. Rest assured that the presets available when creating your composition will be available permanently (slight adjustments might be made to fit widget updates).
+Presets are pre-made skins that are created by the Widgetic staff for each widget. You can choose to use any of them for your embeds or use them as a base for your own customizations. Rest assured that the presets available when creating your composition will be available permanently (slight adjustments might be made to fit widget updates).
 
 Presets are retrieved from the same endpoint as [`skins`](#get-all-skins-and-presets), or by way of the [`widget's`](#the-widget-object) `skins` attribute. You can distinguish presets from skins from the structure of the `id`. Presets have the widget's `id` concatenated to their own.
 
 ### The skin meta
+
+> Getting a widget's skin meta
+
+```js
+Widgetic.api('widgets/5404451409c7e20b0d8b4567')
+    .then(function(widget){ console.log(widget.skinMeta) })
+```
+
+> Example response
+
+```json
+{
+      "tabs": {
+        "Interface": {
+          "backgroundcolor": {
+            "control": "core/controls/color",
+            "options": {
+              "help_text": "Select the color and transparency for the widget's background.",
+              "label": "Background Color",
+              "default": "#ffff"
+            }
+          },
+          "scrollColor": {
+            "control": "core/controls/color",
+            "options": {
+              "help_text": "Select the color and transparency for the scroll's background.",
+              "label": "Scroll Color",
+              "default": "#ffff"
+            }
+          },
+          "distanceBetweenImages": {
+            "control": "core/controls/stepper",
+            "options": {
+              "help_text": "Set the distance between any two images.",
+              "label": "Distance Between Images",
+              "default": 3,
+              "unit": " px",
+              "min": 0,
+              "max": 300
+            }
+          }
+        }
+      }
+    }
+```
+
+The skin schema is defined per widget, as each widget requires different attributes for it's skin. This schema is accessible on the [widget resource's](#the-widget-object) `skinMeta` attribute.
+
+Field                    | Description
+------------------------ | -----------
+[tabs](#skin-attributes) | A hash that describes each of the widget's attributes, grouped by function. The keys are the names of the skin's attributes. The values contain other metadata related to value restrictions and descriptions
+
+#### <a name="skin-attributes"></a> Tabs
+
+Field       | Description
+----------- | -----------
+control     | An identifier for the [`control`](#controls) that will handle validation and UI rendering in the editor
+options     | Various options used for the `control`
 
 ### Get all skins and presets
 
@@ -223,7 +283,7 @@ Widgetic.api('skins', {widget_id: '5108dcefe599d12e6f000000'})
         skin.name = "My red skin";
         skin.backgroundcolor = "#ff0000";
 
-        // send the api request
+        // save as a new skin
         return Widgetic.api('skins', 'POST', JSON.stringify(skin));
     }).then(function(skin) {
         // use the saved skin
@@ -409,7 +469,7 @@ The content schema is defined per widget, as each widget requires different attr
 Field       | Description
 ----------- | -----------
 [options](#content-options)       | Meta information related to the content
-[attributes](#content-attributes) | A hash that describes each of the widget's attributes. The keys are the names of the attributes, as required when defining the compositions' content items. The values contain other metadata related to value restrictions and descriptions
+[attributes](#content-attributes) | A hash that describes each of the widget's attributes. The keys are the names of the attributes, as required when defining the composition's content items. The values contain other metadata related to value restrictions and descriptions
 
 #### <a name="content-options"></a> Options
 
@@ -474,10 +534,10 @@ var newComp = {
         {
           id: 0,
           image: 'http://placehold.it/200x200',
-          order: 0,
+          order: 0
         },
         {
-          id: 1,   
+          id: 1,
           image: 'http://placehold.it/200x200/ff33cc',
           order: 1
         }
@@ -489,11 +549,10 @@ var newComp = {
 Widgetic.api('compositions', 'POST', JSON.stringify(newComp))
     .then(function(composition) {
         console.log('You have saved the ' + composition.id + ' composition!')
-        newComp = composition
     })
 ```
 
-Create a composition.
+To create a composition you must first decide on the widget and skin to use. Construct an object according to the [composition schema](#the-composition-object). The `content` attribute must contain an array of content items. Each content item must contain a unique (in the context of the array) `id`, an `order` field (used for sorting the items in the widget UI) and the attributes defined in the widget's [content schema](#the-content-meta), of which only the `mainAttribute` is required.
 
 #### HTTP Request
 
@@ -587,3 +646,8 @@ Improvements we are currently working on:
 * add curl examples
 * add details about server-side authentication
 * document managed accounts
+* document optional, required attributes
+
+**API**
+
+* support JSON schema for all resource types, including content items to ease creation and validation 
