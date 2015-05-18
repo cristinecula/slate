@@ -111,13 +111,13 @@ under the License.
       </div>
     </div>
     <script>
-      iFrameResize()
       $('iframe.live-example').each(function() {
         var $this = $(this)
         var $button = $('<button>Re-run</button>');
 
         $this.wrap('<div class="live-example_wrapper">');
         $this.after($button);
+        iFrameResize()
         
         $button.on('click', function() {
           this.contentDocument.location.reload(true)
