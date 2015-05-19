@@ -1,0 +1,12 @@
+---
+layout: examples-auth
+---
+
+<script>
+function snippet() {
+  Widgetic.api('widgets', {fields: ['id, name']})
+    .then(function(widgets) {
+      console.log(widgets);
+    });
+}
+</script>

@@ -1,0 +1,55 @@
+---
+layout: examples-auth
+---
+
+<script>
+function snippet() {
+  var getMosaicGallery = function() {
+    return Widgetic.api('widgets', {fields: ['id, name']})
+      .then(function(widgets) {
+        // find the mosaic gallery
+        return widgets.filter(function(widget) {
+          return widget.name === 'Mosaic Gallery'
+        })[0]
+      })
+      .then(function(mosaicGallery) {
+        console.log('The id of the Mosaic Gallery Widget:');
+        console.log(mosaicGallery.id);
+
+        console.log('Getting the details!');
+        return Widgetic.api('widgets/' + mosaicGallery.id);
+      });
+  }
+
+  getMosaicGallery()
+    .then(function(mosaicGallery) {
+      var newComp = {
+          name: 'My new composition',
+          widget_id: mosaicGallery.id,
+          skin_id: mosaicGallery.skins[0].id,
+          content: [
+              {
+                id: 0,
+                image: 'https://widgetic.com/assets/widgets/demo/Images/Vertical/image02.jpg',
+                order: 0
+              },
+              {
+                id: 1,
+                image: 'https://widgetic.com/assets/widgets/demo/Images/Vertical/image01.jpg',
+                order: 1
+              }
+          ]
+      };
+
+      return Widgetic.api('compositions', 'POST', JSON.stringify(newComp))
+    })
+    .then(persist('rest-example-comp'))
+    .then(function(composition) {
+      console.log('Your composition has been saved!')
+      console.log(composition);
+    })
+    .fail(function(errors) {
+      console.log(errors);
+    })
+}
+</script>

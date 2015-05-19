@@ -1,0 +1,34 @@
+---
+layout: examples-auth
+---
+
+<script>
+function snippet() {
+  var getMosaicGallery = function() {
+    return Widgetic.api('widgets', {fields: ['id, name']})
+      .then(function(widgets) {
+        // find the mosaic gallery
+        return widgets.filter(function(widget) {
+          return widget.name === 'Mosaic Gallery'
+        })[0]
+      })
+      .then(function(mosaicGallery) {
+        console.log('The id of the Mosaic Gallery Widget:');
+        console.log(mosaicGallery.id);
+
+        console.log('Getting the details!');
+        return Widgetic.api('widgets/' + mosaicGallery.id);
+      });
+  }
+
+
+  getMosaicGallery()
+    .then(function(mosaicGallery) {
+      return mosaicGallery.skins[0];
+    })
+    .then(function(skin) {
+      console.log('The first skin:');
+      console.log(skin)
+    });
+}
+</script>

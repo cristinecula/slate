@@ -17,22 +17,28 @@ var showUsername = function() {
   })
 }
 
-var showError = function() {
-  alert('Login failed');
-}
+var doInteractiveAuth = function() {
+  var def = Widgetic.Aye.defer()
 
-var showButton = function() {
-  $('button').show().on('click', function() {
+  console.log('Background login failed; reverting to interactive login');
+
+  $('button').show().off('click').on('click', function() {
     Widgetic.auth()
-      .then(hideButton)
-      .then(showUsername)
-      .fail(showError)
-  });  
+      .then(def.resolve)
+      .fail(def.reject)
+  });
+
+  return def.promise;
 }
 
-Widgetic.auth(false)
-  .then(hideButton)
-  .then(showUsername)
-  .fail(showButton)
+function init() {
+  Widgetic.auth(false)
+    .fail(doInteractiveAuth)
+    .then(hideButton)
+    .then(showUsername)
+    .fail(init)
+}
+
+init()
 
 </script>

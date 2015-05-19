@@ -26,6 +26,9 @@ under the License.
     <%= stylesheet_link_tag :print, media: :print %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
+    <%= javascript_include_tag  "bower/lazyloadxt/dist/jquery.lazyloadxt.min" %>
+    <%= javascript_include_tag  "bower/lazyloadxt/dist/jquery.lazyloadxt.extra" %>
+
     <%= javascript_include_tag  "bower/iframe-resizer/js/iframeResizer.min" %>
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>
@@ -113,7 +116,7 @@ under the License.
     <script>
       $('iframe.live-example').each(function() {
         var $this = $(this)
-        var $button = $('<button>Re-run</button>');
+        var $button = $('<button>Reload</button>');
 
         $this.wrap('<div class="live-example_wrapper">');
         $this.after($button);
