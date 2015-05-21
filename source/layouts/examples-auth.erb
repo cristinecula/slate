@@ -47,7 +47,11 @@
     }
 
     var retrieve = function(key) {
-      return JSON.parse(localStorage[key])
+      try {
+        return JSON.parse(localStorage[key])        
+      } catch(e) {
+        return false;
+      }
     }
 
     var Widgetic = Blogvio;

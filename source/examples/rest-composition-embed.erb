@@ -1,10 +1,21 @@
 ---
-layout: examples
+layout: examples-auth
 ---
 
 <div class="embed"></div>
 
 <script>
-composition = retrieve('rest-example-comp')
-Widgetic.UI.composition(document.querySelector('.embed'), composition)
+var ran = false;
+function snippet() {
+  if(ran) return;
+  
+  composition = retrieve('rest-example-comp');
+  if(!composition) {
+    console.log('run the previous example to create a composition!');
+    return;
+  }
+
+  Widgetic.UI.composition(document.querySelector('.embed'), composition)
+  ran = true;
+}
 </script>
