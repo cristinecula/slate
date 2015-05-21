@@ -2,7 +2,41 @@
 
 ## Embedding your first widget
 
-<span class="todo">Coming soon</span>
+Widgetic allows multiple embed options. We recommend using the **anchor + sdk** method, as it is really simple and allows use of advanced features (out-of-widget popups and overlays). 
+
+### anchor + sdk
+
+> anchor + sdk embed
+
+```html
+<script type="text/javascript" src="https://widgetic.com/sdk/sdk.js"></script>
+
+<a href="https://widgetic.com/widgets/photo/mosaic-gallery/" class="widgetic-composition" data-id="555b5e6509c7e29e718b4569" data-width="500" data-height="500" data-resize="allow-scale-down" data-brand="bottom-right">Mosaic Gallery Widget</a>
+```
+
+The default embed mechanism. Recommended for simple use-cases. It allows multiple auto-scaling options, specifying default dimensions, and control of the branding position. 
+
+The embed code is featured on the composition's page. Just copy and paste the code to the desired location on the website and the Widgetic SDK will transform the anchor tag into the actual widget.
+
+### iframe
+
+> iframe embed
+
+```html
+<iframe src="https://widgetic.com/embed/555b5e6509c7e29e718b4569?bp=top-right" width="500" height="500" frameborder="0" style="visibility:hidden;" onload="this.style.visibility='visible';"></iframe>
+```
+
+The most basic embed mechanism. The iframe embed does not allow auto-scaling  and advanced widget features (e.g.: popups and overlays). It is only recommended for websites where you cannot include the Widgetic SDK. 
+
+### dynamic
+
+> dynamic embed
+
+```js
+Widgetic.UI.composition(document.querySelector('.embed'), composition)
+```
+
+The most advanced of the embed methods. Allows embedding of compositions, but also dynamic creation of compositions with skin and content defined at runtime. Useful for content management systems, websites built using a templating language, etc.
 
 ## Login with Widgetic
 
@@ -196,7 +230,7 @@ getMosaicGallery()
 
 Using this information, let's have a first attempt at creating and saving a composition. We'll experiment a bit by sending some content which does not conform to the schema. 
 
-The Widgetic API tries to return useful error information to ease app development. We can catch and handle these errors on the `.fail` branch of the api calls.
+The Widgetic API tries to return useful error information to ease app development. We can catch and handle these errors on the `.fail` branch of the `api` calls.
 
 ---
 
