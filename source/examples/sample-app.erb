@@ -1,0 +1,176 @@
+---
+layout: examples
+---
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+
+<style type="text/css">
+	.login-area,
+	.widget-listing,
+	.composition-listing,
+	.edit-area {
+		transition: opacity 300ms;
+	}
+
+	.login-area {
+		opacity: 0;
+	}
+
+	.app.init > .login-area {
+		opacity: 1;
+	}
+
+	.app.init > .widget-listing,
+	.app.init > .composition-listing,
+	.app.init > .edit-area {
+		opacity: 0;
+	}
+</style>
+
+<div class="app">
+	<div class="login-area">
+		<button>Login with Widgetic</button>
+	</div>
+	<ul class="widget-listing">
+	</ul>
+	<ul class="composition-listing">
+	</ul>
+	<div class="edit-area">
+	</div>
+</div>
+
+<script>
+(function() {
+	var LoginArea = function(el) {
+		this.el = el;
+
+		var button = this.el.find('button');
+		button.on('click', this.doLogin.bind(this, true))
+
+		// do a background login
+		this.doLogin(false);
+	}
+
+	LoginArea.prototype.doLogin = function(interactive) {
+		return Widgetic.auth(interactive)
+			.then(function() {
+				this.el.trigger('login-success')
+			}.bind(this))
+			.fail(function() {
+				this.el.trigger('login-fail')
+			}.bind(this))
+	};
+
+	var WidgetListing = function(el) {
+		this.el = el;
+
+		this.el.on('click', 'li', this._onWidgetClick.bind(this))
+	}
+
+	WidgetListing.prototype.load = function() {
+		this.el.html('Loading the widgets!');
+
+		return Widgetic.api('widgets')
+			.then(this._onWidgetsLoaded.bind(this))
+	};
+
+	WidgetListing.prototype._onWidgetsLoaded = function(widgets) {
+		this.el.empty();
+
+		widgets.map(function(widget) {
+			var item = $('<li>')
+				.html(widget.name)
+				.data('widget', widget)
+			this.el.append(item)
+		}.bind(this))
+	};
+
+	WidgetListing.prototype._onWidgetClick = function(ev) {
+		var widget = $(ev.target).data('widget');
+		this.el.trigger('widget-selected', widget);
+	};
+
+	var CompositionListing = function(el) {
+		this.el = el;
+
+		this.el.on('click', 'li', this._onCompositionClick.bind(this))
+
+		this.el.html('Select a widget to list the available compositions!');
+	}
+
+	CompositionListing.prototype.load = function(widget) {
+		this.widget = widget;
+
+		return Widgetic.api('compositions', {widget_id: widget.id})
+			.then(this._onCompositionsLoaded.bind(this))
+	};
+
+	CompositionListing.prototype._onCompositionsLoaded = function(compositions) {
+		this.el.empty()
+		
+		compositions.map(function(composition) {
+			var item = $('<li>')
+				.html(composition.name)
+				.data('composition', composition)
+			this.el.append(item)
+		}.bind(this))
+
+		if(compositions.length === 0) {
+			this.el.html('You have no compositions for ' + this.widget.name)
+		}
+	}
+
+	CompositionListing.prototype._onCompositionClick = function(ev) {
+		var composition = $(ev.target).data('composition');
+		this.el.trigger('composition-selected', composition);
+	};
+
+	var EditArea = function(el) {
+		this.el = el;
+	}
+
+	EditArea.prototype.new = function(widget) {
+		this.widget = widget;
+
+		this.el.html('new widget for ' + this.widget.name)
+	};
+
+	EditArea.prototype.edit = function(composition) {
+		this.composition = composition;
+		this.el.html('editing composition '+ this.composition.id +' for the ' + this.widget.name + ' widget')
+	};
+
+
+	var App = function(el) {
+		this.el = el;
+
+		this.loginArea          = new LoginArea(this.el.find('.login-area'));
+		this.widgetListing      = new WidgetListing(this.el.find('.widget-listing'));
+		this.compositionListing = new CompositionListing(this.el.find('.composition-listing'));
+		this.editArea           = new EditArea(this.el.find('.edit-area'));
+
+		this.el.on('login-success',        this.onLoginSuccess.bind(this))
+		this.el.on('widget-selected',      this.onWidgetSelected.bind(this))
+		this.el.on('composition-selected', this.onCompositionSelected.bind(this))
+
+
+		this.el.addClass('init');
+	}
+
+	App.prototype.onLoginSuccess = function() {
+		this.el.removeClass('init')
+		this.widgetListing.load();
+	};
+
+	App.prototype.onWidgetSelected = function(ev, widget) {
+		this.compositionListing.load(widget);
+		this.editArea.new(widget);
+	};
+
+	App.prototype.onCompositionSelected = function(ev, composition) {
+		this.editArea.edit(composition);
+	};
+
+	var app = new App($('.app'));
+}());
+</script>
