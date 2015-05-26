@@ -1,0 +1,3 @@
+[submodule "source/examples/sample-cms"]
+	path = source/examples/sample-cms
+	url = git@github.com:blogvio/sample-quick-cms.git
