@@ -58,7 +58,10 @@
 
     $('.console').append($('<div>').text('Console:'))
     var log = function(what) {
-      $('.console').append($('<div>').text(JSON.stringify(what, null, '  ')))
+      if(typeof what !== "string") {
+        what = JSON.stringify(what, null, '  ');
+      }
+      $('.console').append($('<div>').text(what));
     }
 
     var oldLog = console.log
