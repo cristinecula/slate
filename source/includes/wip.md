@@ -115,3 +115,101 @@ la click pe oricare widget sa apara editorul cu primul skin selectat
 **editorul trebuie sa lanseze evenimente (saved)**
 cand userul ajunge pe ultimul pas din editor (cand da publish)
 editorul si widgetul va disparea
+
+------
+
+- cum iau un access_token server <-> server
+- cum folosesc un access_token luat server <-> server
+* editorul face comp read-only
++ editor.close trebuie sa dezactiveze celelalte metode (warn('the editor has been closed'))
++ composition.setWidth, setHeight
++ composition.getEmbedCode()
++ composition.isSaved() sau isPersisted()
++ composition.delete() ???
+
+Ca sa folosesti dinamic widgets trebuie sa ai access token? NU
+E de ajuns client_id? Cred ca da. VERIFICA!
+
+Ce se intampla daca un user oarecare da composition.save() pe un widget dinamic?
+
+
+compozitii dinamice -> salveaza comp data la el
+comp dinamice pt widgets pro
+
+
++comp dinamice pot pleca numai de la o comp salvata !!! pentru ca limita de widgets sa conteze
++comp dinamice trebuie sa astepte continut/skin
+
+
+var 1
+<a href="https://local.widgetic.com/widgets/photo/before-after-gallery/" class="widgetic-composition" data-id="556304b34774932d598b4595" data-width="560" data-height="341" data-resize="allow-scale-down" data-dynamic="true">Before and After Gallery Widget</a>
+
+<script type="text/javascript">
+    comp = Widgetic.UI.composition.get('556304b34774932d598b4595');
+    comp.clearContent()
+    comp.setContent([{image: 'http://ceva.com/image.jpg'}])
+    comp.display()
+</script>
+
+var 2
+
+<script type="text/javascript">    
+this.widget = Widgetic.UI.composition(
+    this.widgetArea[0], {
+        widget_id: widget.id,
+        wait_editor_init: true
+    }
+);
+
+
+this.widget = new Widgetic.UI.composition(
+    this.widgetArea[0], composition.id
+);
+
+</script>
+
+---
+
+<script>
+var widget = Widgetic.UI.composition('.widget', {
+    widget: '123'
+    content: [...]
+    skin: {...} | 'skin-id'
+})
+
+Widgetic.auth.token('1234-token')
+
+appX ->                 userY ->         comp123
+http://sitekit.com      http://gica.com
+http://app.sitekit.com
+---
+
+comp -> embeddable = true
+daca e dinamic nu se poate da share
+
+data-share-parent va fi url-ul de unde s-a dat share
+daca lipseste va fi folosit primul url pe care stim ca s-a dat embed
+=> pe masura ce se da embed, sa stocam url-urile in baza de date
+
+
+<a href="https://local.widgetic.com/widgets/photo/before-after-gallery/" class="widgetic-composition" data-id="556304b34774932d598b4595" data-width="560" data-height="341" data-resize="allow-scale-down" data-dynamic="true" data-share-parent="http://lefigaro.com/123/ceva.articol">Before and After Gallery Widget</a>
+
+---
+
+var comp = Widgetic.UI.composition('.widget', {
+    composition: '123',
+    width: 300,
+    height: 200,
+    resize: 'full-width',
+    brandingPosition: 'top-left',
+    showBranding: true,
+    content: [...]
+    skin: {...} | 'skin-id'
+})
+
+Widgetic.UI.composition.getAll('555b5e6509c7e29e718b4569')
+Widgetic.UI.composition.get('123')
+</script>
+
+3 conturi managed
+5 widgets

@@ -292,6 +292,10 @@ Widgetic.UI.composition(document.querySelector('.embed'), composition)
 
 Congratulations! You've created your first composition using the REST API. Here it is embedded in it's full glory.
 
+## Building a custom CMS
+
+<iframe class="live-example" data-src="examples/sample-app.html" scrolling="no"></iframe>
+
 ## White-label integration
 
 <span class="todo">In progress</span>
@@ -300,4 +304,3 @@ A white-label product or service is a product or service produced by one company
 
 Some websites use white labels to enable a successful brand to offer a service without having to invest in creating the technology and infrastructure itself. Many IT and modern marketing companies outsource or use white-label companies[3] and services to provide specialist services without having to invest in developing their own product.
 
-Using the [managed users](#managed-users) api, you can
