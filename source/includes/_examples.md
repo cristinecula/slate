@@ -294,7 +294,11 @@ Congratulations! You've created your first composition using the REST API. Here 
 
 ## Building a custom CMS
 
-<iframe class="live-example" data-src="examples/sample-app.html" scrolling="no"></iframe>
+<iframe class="live-example" data-src="examples/sample-cms/index.html" scrolling="no"></iframe>
+
+## Building a custom editor
+
+<iframe class="live-example" data-src="examples/sample-editor/index.html" scrolling="no"></iframe>
 
 ## White-label integration
 
