@@ -1,6 +1,6 @@
-# 3rd Party
+# Third Party
 
-## Plugins (for 3rd party services such as WordPress and Drupal)
+## Plugins (for third party services such as WordPress and Drupal)
 
 We're constantly adding new libraries for different platforms and products to make it easier for you to get started. 
 
