@@ -292,10 +292,18 @@ Widgetic.UI.composition(document.querySelector('.embed'), composition)
 
 Congratulations! You've created your first composition using the REST API. Here it is embedded in it's full glory.
 
+## Building a custom editor
+
+<iframe class="live-example" data-src="examples/sample-editor/index.html" scrolling="no"></iframe>
+
+This is a sample project showcasing the use of the Widgetic SDK to build a custom editor for a widget.
+
+Get the source-code at [https://github.com/blogvio/sample-custom-editor](https://github.com/blogvio/sample-custom-editor).
+
 ## Building a custom CMS
 
 <iframe class="live-example" data-src="examples/sample-cms/index.html" scrolling="no"></iframe>
 
-## Building a custom editor
+This is a sample project showcasing the use of the Widgetic SDK to build a custom CMS panel.
 
-<iframe class="live-example" data-src="examples/sample-editor/index.html" scrolling="no"></iframe>
+Get the source-code at [https://github.com/blogvio/sample-quick-cms](https://github.com/blogvio/sample-quick-cms).
