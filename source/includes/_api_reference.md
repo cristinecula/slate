@@ -1,4 +1,125 @@
-# REST API
+# API Reference
+
+## Summary
+The API is organized around the following resources
+
+API                           | Resource         | Description
+------------------------------|------------------|------------
+[Users](#user)                | https://widgetic.com/api/v2/users | Get the users profile information
+[Widgets](#widgets)           | https://widgetic.com/api/v2/widgets | Access the available widgets
+[Skins](#skins)               | https://widgetic.com/api/v2/skins | Create and update Skins. List skins or access them individually.
+[Compositions](#compositions) | https://widgetic.com/api/v2/compositions | Create and update Compositions. List compositions or access them individually.
+
+JSON is returned in all responses.
+
+## Introduction
+The Widgetic API is architected around REST, using standard HTTP verbs to communicate. All responses come in standard JSON.
+
+We also provide a Javascript SDK (Widgetic.js) that enables direct communication with the REST API, user authentication and authorization, and advanced manipulation of embedded widgets.
+
+Widgetic# Getting an Application Key
+
+> Including the javascript SDK
+
+```html
+<script src="https://widgetic.com/sdk/sdk.js"></script>
+```
+
+> Initializing the SDK
+
+```js
+// initialize Widgetic with your api key and a redirect uri
+Widgetic.init('<api key>','<redirect uri>');
+```
+
+Widgetic uses API keys to allow access to the REST API. You can register a new app and get an API key at our [developer portal](https://widgetic.com/developers). 
+
+To interact with the REST API using the Widgetic.js SDK, it must first be initialized with your API key and Redirect URI. The API key is provided on the developer portal. The Redirect URI must point to a webpage on your domain that includes the widgetic.js SDK. This could be your homepage or an empty html page created for this purpose. The Redirect URI is used for authentication purposes.
+
+## Getting an Access Token for an User
+
+You can use Widgetic.js to connect your users to their Widgetic accounts. This allows you to access and manage their widgets and customizations, plus other features available through the API. The authentication and authorization protocol is based on OAuth2.
+
+### Interactive login 
+
+> Triggering login on button click
+
+```js
+$('button').on('click', function(){
+    // do the interactive (popup) login
+    Widgetic.auth().then(
+        function(successResponse) {
+            // the user has authorized your app
+            console.log(
+                successResponse.accessToken
+            );
+        }, function(failResponse) {
+            // the user has refused authorization or has closed the popup window
+            console.log(failResponse); 
+        }
+    );
+}) 
+```
+
+> Example response
+
+```js
+successResponse = {
+    status: "connected",
+    accessToken: "MjVkOWVlOTJmYzZmNDZmNTJkZDQwMmFkZmIzYTA3YTUyYTg1Mjk2NWU3MWZiNzBjMzFiYmI3M2Y2YTEwMmVjYQ",
+    expiresIn: "3600",
+    scope: ""
+}
+```
+
+The Javascript SDK has the `Widgetic.auth` function that initiates and handles the auth process. Calling `Widgetic.auth()` opens up a login popup where the user can log into (or set up) their Widgetic account and authorize your app. The return value of this function is a Promise object with the `then` and `fail` methods. You have to pass callbacks to these functions to get the success or fail response. 
+
+<aside class="notice">The SDK uses the <a href="https://github.com/cburgmer/ayepromise">ayepromise</a> library for it's Promise implementation.</aside>
+
+---
+
+### Non-Interactive login
+
+> Trying a background login
+
+```js
+Widgetic.auth(false).then(
+    function(successResponse) {
+        // the user is logged in and has authorized your app
+        console.log(
+            successResponse.accessToken
+        );
+    }, function(failResponse) {
+        // the user is not logged in or the app is not authorized
+        console.log(failResponse); 
+    }
+);
+```
+
+If you pass `true` to `Widgetic.auth`, the SDK will try a 'non-interactive login' which won't open any popups. This is useful for checking if the user has already authorized your app and reconnecting to the Widgetic API upon navigation. If the user is logged into Widgetic and has authorized your app in the past, the login process will succeed. Otherwise it will fail and you should prompt the user to do an 'interactive' login.
+
+---
+
+### Scopes
+
+Scopes let you specify exactly what type of access you need. Scopes limit access for OAuth tokens. They do not grant any additional permission beyond that which the user already has.
+
+> Requesting additional scopes
+
+```js
+Widgetic.auth(true, ['email', 'skins']);
+```
+
+Available scopes:
+
+Name         | Description
+-------------|-----------
+(no scope)   | Grants read-only access to public information (username, widget compositions, skins)
+email        | Grants access to the users email
+skins        | Grants write access to the users skins
+compositions | Grants write access to the users widget compositions
+
+## API calls
 
 > API entry point URL
 
@@ -6,13 +127,21 @@
 https://widgetic.com/api/v2
 ```
 
-> Example API request
+> Example of an api call
 
-```
-GET https://widgetic.com/api/v2/users/me
+```js
+Widgetic.api('users/me').then(function(user) {
+    console.log('Hello ' + user.username);
+})
 ```
 
-The Widgetic API is inspired by the REST architecture. In it's current state the API is usable, but lacks many desirable features. We are committed to improving the quality of the API to allow the flexibility and usability our third-party developers require. You can consult the [roadmap](#roadmap) to follow along with our progress. We appreciate your [feedback](mailto:support@widgetic.com) for improving it.
+After the user has logged in (i.e. you have an access token) you can start making api calls on their behalf.
+
+To communicate with the REST API you use the `Widgetic.api` function.
+
+## Widgetic.js
+
+Widgetic.js is our javascript SDK which enables advanced widget features (popups and overlays, in-place edit, responsiveness, and future functionality), user authentication, cross-domain REST api calls, and direct widget manipulation.
 
 ## User
 
@@ -47,13 +176,9 @@ Widgetic.api('users/me')
 
 Retrieve information about the logged in user. Useful for "Sign in with Widgetic" functionality. By default the response is limited to their Widgetic unique ID and their username. To get the email info you must request the [`email` scope](#scopes) during the authorization step.
 
-### Managed Users
-
-<span class="todo">Coming soon</span>
-
 ## Widgets
 
-The main currency of Widgetic. You can query our collection of widgets and use the information to create embeddable [`compositions`](#compositions). All widgets allow advanced customization of the UI. The customizations can be saved as [`skins`](#skins). Each widget comes with a predefined set of skins, called [`presets`](#presets).
+The main currency of Widgetic. You can query our collection of widgets and use the information to create embeddable [`compositions`](#compositions). All widgets allow advanced customization of the UI. The customizations can be saved as [`skins`](#skins) (themes). Each widget comes with a predefined set of skins, called [`presets`](#presets).
 
 ### The widget object
 
@@ -169,7 +294,9 @@ Widgetic.api('skins', {widget_id: widgetId})
 
 Presets are pre-made skins that are created by the Widgetic staff for each widget. You can choose to use any of them for your embeds or use them as a base for your own customizations. Rest assured that the presets available when creating your composition will be available permanently (slight adjustments might be made to fit widget updates).
 
-Presets are retrieved from the same endpoint as [`skins`](#get-all-skins-and-presets), or by way of the [`widget's`](#the-widget-object) `skins` attribute. You can distinguish presets from skins from the structure of the `id`. Presets have the widget's `id` concatenated to their own.
+Presets are retrieved from the same endpoint as [`skins`](#get-all-skins-and-presets), or by way of the [`widget's`](#the-widget-object) `skins` attribute. You can distinguish presets from skins from the structure of the `id`. Presets have the widget's `id` concatenated to their own (`p1_5404451409c7e20b0d8b4567`).
+
+---
 
 ### The skin meta
 
@@ -230,6 +357,8 @@ Field       | Description
 ----------- | -----------
 control     | An identifier for the [`control`](#controls) that will handle validation and UI rendering in the editor
 options     | Various options used for the `control`
+
+---
 
 ### Get all skins and presets
 
@@ -412,6 +541,8 @@ skin_id     | The skin or preset used for customizing the widget's looks
 width       | The dimensions the embed should load with. Actual behavior depend upon the [embed resize option](#embed-resize-options) used
 height      |
 
+---
+
 ### The content meta
 
 > Getting a widget's content meta
@@ -488,7 +619,26 @@ options     | Various options used for the `control`
 
 #### Controls
 
-<span class="TODO">Coming soon</span>
+These are the Input Controllers available in the Editor:
+
+* Dropdown
+* Number
+* URL
+* RSS
+* Text
+* Text Area
+* Toggle
+* Slider
+* RangeSlider
+* Date and Time
+* Location
+* Color Picker
+* Browser Source
+* Position (Pixel Based + Grid Based)
+* Order Items
+* Font
+
+---
 
 ### Get all compositions
 
@@ -634,20 +784,4 @@ Delete an existing composition.
 
 <aside class="notice warning">The <code>DELETE</code> request does not validate if the composition is embedded. Embedded compositions will stop working. Be sure to remove all embeds before deleting a composition.</aside>
 
----
-
-## Roadmap
-
-Improvements we are currently working on:
-
-**Documentation**
-
-* add Widgetic.js Examples
-* add curl examples
-* add details about server-side authentication
-* document managed accounts
-* document optional, required attributes
-
-**API**
-
-* support JSON schema for all resource types, including content items to ease creation and validation 
+<!-- TODO: add Errors section -->

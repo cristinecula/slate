@@ -11,21 +11,27 @@ toc_footers:
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - concepts
-  - authentication
-  - rest
-  - widgetic_js
+  - glossary
+  - 3rd_party
+  - api_reference
   - examples
+  - resources
 
 search: true
 ---
 
-# Introduction
+# Overview
 
-Welcome to the Widgetic API documentation! Here you will find information on how to integrate with and use the [Widgetic API](#rest-api).  The API is still in development and we're trying to make this documentation as user-friendly and example-filled as possible, but please [drop us a line](mailto:support@widgetic.com) with any questions. 
+Widgetic makes it easy for anyone to create custom widgets without writing code.
 
-The Widgetic API is architected around REST, using standard HTTP verbs to communicate and HTTP response codes to indicate status and errors. All responses come in standard JSON.
+As a developer, you can use the Widgetic API to empower users by giving them access to a selection of widgets and the Editor directly in your site, platform or CMS.
 
-We also provide a Javascript SDK (Widgetic.js) that enables direct communication with the REST API, user authentication and authorization, and advanced manipulation of embedded widgets.
+This documentation will help you get started! 
 
-You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+<!-- TODO: add DEMO -->
+
+## Possible Use Cases
+
+Widgetic can be used in many different ways. We're listing some possible use cases below - see if you can find yourself in any of them. You might be thinking of a completely novel integration with Widgetic, which is perfectly fine.
+
+<!-- TODO add use cases module -->
