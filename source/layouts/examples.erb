@@ -16,20 +16,31 @@
         color: white;
         font-family: Roboto, sans-serif;
         padding: 20px;
-        background: #504356;
+        background: #292929;
       }
 
-      pre.console {      
+      pre.console {
+        min-height: 120px;
         max-height: 400px;
         overflow: auto;
         overflow-x: hidden;
         margin: 0;
-        background: hsla(0, 0%, 0%, 0.5);
-        box-shadow: 2px 2px 3px rgba(0,0,0,.2);
+        color: #5bc200;
+        background: #212121;
       }
 
-      pre.console div:nth-child(even) {    
-        background: rgba(255,255,255,.1);
+      button {
+        background-color:  #ea5852;
+        color: #fff;
+        font-size: 14px;
+        min-width: 100px;
+        text-align: center;
+        border: none;
+        border-radius: 30px;
+        padding: 10px;
+        outline: none;
+        cursor: pointer;
+        margin: 20px 0;
       }
     </style>
   </head>
@@ -56,12 +67,11 @@
 
     Widgetic.init('554de62709c7e23f7f8b4567_4bgmtqx250aoookowwook40gk0408s4gs8w0o4o8o0cc4cscc8', window.location.origin + '/examples/proxy.html');
 
-    $('.console').append($('<div>').text('Console:'))
     var log = function(what) {
       if(typeof what !== "string") {
         what = JSON.stringify(what, null, '  ');
       }
-      $('.console').append($('<div>').text(what));
+      $('.console').append($('<div>').text('> ' + what));
     }
 
     var oldLog = console.log
