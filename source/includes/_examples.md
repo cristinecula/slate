@@ -298,7 +298,7 @@ Congratulations! You've created your first composition using the REST API. Here 
 
 This is a sample project showcasing the use of the Widgetic SDK to build a custom editor for a widget.
 
-Get the source-code at [https://github.com/blogvio/sample-custom-editor](https://github.com/blogvio/sample-custom-editor).
+Get the sourcecode at [https://github.com/widgetic/sample-custom-editor](https://github.com/widgetic/sample-custom-editor).
 
 ## Building a custom CMS
 
@@ -306,4 +306,4 @@ Get the source-code at [https://github.com/blogvio/sample-custom-editor](https:/
 
 This is a sample project showcasing the use of the Widgetic SDK to build a custom CMS panel.
 
-Get the source-code at [https://github.com/blogvio/sample-quick-cms](https://github.com/blogvio/sample-quick-cms).
+Get the sourcecode at [https://github.com/widgetic/sample-quick-cms](https://github.com/widgetic/sample-quick-cms).

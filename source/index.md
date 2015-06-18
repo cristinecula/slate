@@ -7,7 +7,7 @@ language_tabs:
 
 toc_footers:
   - <a href='mailto:support@widgetic.com'>Have questions? Contact us!</a>
-  - <a href='https://widgetic.com/developers/early-access'>Sign up for early access to the Widgetic API</a>
+  - <a href='https://widgetic.com/developers/early-access'>Sign up for early access</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:

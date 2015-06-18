@@ -17,7 +17,7 @@ The Widgetic API is architected around REST, using standard HTTP verbs to commun
 
 We also provide a Javascript SDK (Widgetic.js) that enables direct communication with the REST API, user authentication and authorization, and advanced manipulation of embedded widgets.
 
-Widgetic# Getting an Application Key
+## Getting an Application Key
 
 > Including the javascript SDK
 
