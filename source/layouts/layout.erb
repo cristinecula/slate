@@ -121,6 +121,9 @@ under the License.
         $this.wrap('<div class="live-example_wrapper">');
         iFrameResize()
       })
+      $.extend($.lazyLoadXT, {
+        onload: function(){window.toc.calculateHeights();}
+      });
     </script>
   </body>
 </html>
