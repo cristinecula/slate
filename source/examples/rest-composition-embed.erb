@@ -2,6 +2,16 @@
 layout: examples-auth
 ---
 
+<style type="text/css">
+	.console {
+		display: none !important;
+	}
+
+	.embed {
+		height: 300px;
+	}
+</style>
+
 <div class="embed"></div>
 
 <script>
@@ -15,7 +25,7 @@ function snippet() {
     return;
   }
 
-  Widgetic.UI.composition(document.querySelector('.embed'), composition)
+  Widgetic.UI.composition(document.querySelector('.embed'), composition.id)
   ran = true;
 }
 </script>
