@@ -1,7 +1,7 @@
 # Resources
 
 ## Terms and Conditions
-You have to follow a set of rules and standard practices for using the Widgetic API. Failing to do so might result in your app being banned. 
+You have to follow a [set of rules](https://widgetic.com/terms-of-service) and standard practices for using the Widgetic API. Failing to do so might result in your app being banned. 
 
 <!-- TODO: add link -->
 
@@ -14,7 +14,7 @@ Building our API is an ongoing effort and we rely on your feedback for what to f
 
 Documentation
 
-* add Widgetic.js Examples
+* add Widgetic.js examples
 * add curl examples
 * add details about server-side authentication
 * document managed accounts
@@ -26,3 +26,7 @@ API
 
 ## Help
 Are you stuck? Let us know how we can help at [support@widgetic.com](mailto:support@widgetic.com)
+
+---
+---
+---

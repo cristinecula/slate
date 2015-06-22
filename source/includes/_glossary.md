@@ -27,12 +27,14 @@ A composition is the product obtained by customising a widget. A composition rep
 COMPOSITION = Theme + Content + Details + Embed Code
 
 ## Widget Main Attribute
-The widgets are grouped in 4 categories, [based on their content type](http://o7.no/1ASZYj4), which is their main attribute:
+The widgets are grouped in 4 categories, based on their content type, which is their main attribute:
 
-* photo - Photo (galleries, slideshows, banners, etc) - jpg, jpeg, png, gif
-* audio - Audio (audio players) - mp3
-* video - Video (video players) - mp4
-* data - Utilities (eg. chart, ticker, calendar, countdown timer, etc) - text, links
+Category | Uses                                | File Types
+---------|-------------------------------------|------------
+Photo    | galleries, slideshows, banners, etc | jpg, png, gif
+Audio    | audio players                       | mp3
+Video    | video players                       | mp4
+Utilities| chart, ticker, calendar, countdown timer, etc | text
 
 <aside class="note">When creating a Composition, make sure the content type is specific to that widget.</aside>
 
@@ -107,7 +109,7 @@ Managed users receive the same properties of your Standard Account (basic, plus 
 
 **Note:**
 
-1. If you don't ask your users to sign into Widgetic, you must use Managed Users (white label integration). Each Managed User will have his individual data (themes, widget compositions, stats) which you can access with your Standard Account. Check the Terms and Conditions for restrictions regarding users.
+1. If you don't ask your users to sign into Widgetic, you must use Managed Users (white label integration). Each Managed User will have his individual data (themes, widget compositions, stats) which you can access with your Standard Account. Check the [Terms and Conditions](https://widgetic.com/terms-of-service) for restrictions regarding users.
 2. How do we price managed users?
 
     Each Managed User is charged $0.05 for Plus and $0.1 for Premium. For example if you have a Premium account and a white label app, you are charged as follows:

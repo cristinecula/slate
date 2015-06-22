@@ -145,7 +145,7 @@ Widgetic.js is our javascript SDK which enables advanced widget features (popups
 
 ## User
 
-You can get profile information about the current authenticated user. You can also create and work with managed user accounts, to [allow white-label integration](#white-label-integration).
+You can get profile information about the current authenticated user. You can also create and work with managed user accounts, to allow white-label integration.
 
 ### Get User info
 
@@ -498,7 +498,7 @@ To delete a skin, you must issue a `DELETE` http request.
 
 ## Compositions
 
-To create an embeddable widget you construct a `composition` resource, linking a widget, a skin and the desired content. This allows easy [embedding](#embedding-your-first-widget) and facilitates content updates. Compositions can be created using the [Widgetic Editor](#embedding-the-editor), but you can also build them manually, ensuring you adhere to [the schema](#the-composition-object).
+To create an embeddable widget you construct a `composition` resource, linking a widget, a skin and the desired content. This allows easy [embedding](#embedding-your-first-widget) and facilitates content updates. Compositions can be created using the Widgetic Editor, but you can also build them manually, ensuring you adhere to [the schema](#the-composition-object).
 
 ### The composition object
 

@@ -18,6 +18,8 @@ The default embed mechanism. Recommended for simple use-cases. It allows multipl
 
 The embed code is featured on the composition's page. Just copy and paste the code to the desired location on the website and the Widgetic SDK will transform the anchor tag into the actual widget.
 
+You can choose the resize behaviour using the `data-resize` attribute.
+
 ### iframe
 
 > iframe embed
@@ -26,7 +28,9 @@ The embed code is featured on the composition's page. Just copy and paste the co
 <iframe src="https://widgetic.com/embed/555b5e6509c7e29e718b4569?bp=top-right" width="500" height="500" frameborder="0" style="visibility:hidden;" onload="this.style.visibility='visible';"></iframe>
 ```
 
-The most basic embed mechanism. The iframe embed does not allow auto-scaling  and advanced widget features (e.g.: popups and overlays). It is only recommended for websites where you cannot include the Widgetic SDK. 
+The most basic embed mechanism. The iframe embed does not support the auto resize options and advanced widget features (popups and overlays, edit in place, widget API). It is only recommended for websites where you cannot include the Widgetic SDK. 
+
+<aside class="notice">You can however handle responsiveness on your own, as the widgets are responsive and will adjust to the iframe size changes.</aside>
 
 ### dynamic
 
@@ -37,6 +41,23 @@ Widgetic.UI.composition(document.querySelector('.embed'), composition)
 ```
 
 The most advanced of the embed methods. Allows embedding of compositions, but also dynamic creation of compositions with skin and content defined at runtime. Useful for content management systems, websites built using a templating language, etc.
+
+<!-- TODO: update to v1 code -->
+<!-- TODO: add info about selecting a resize option -->
+
+### embed resize options
+
+All of the widgets are responsive and you can choose the way they resize by selecting one of the resize options.
+
+Option           | Behaviour
+-----------------|----------
+fixed            | The widget does not scale. It maintains the specified width and height.
+fixed height     | The widget only scales horizontally to 100% of it's container's size, keeping the height fixed.
+fill             | The widget scales horizontally and vertically to 100% of it's container's size.
+fill width       | The widget scales to 100% of it's container's width while maintaining the defined aspect ratio.
+allow scale down | The widget only scales down, keeping the aspect ratio. It never scales above the defined width and height.
+
+Only the `anchor+sdk` and the `dyanmic` embeds support all resize options. The `iframe` embed is fixed.
 
 ## Login with Widgetic
 
@@ -119,7 +140,7 @@ init()
 
 The other form of the `Widgetic.auth` function, invoked using the `false` parameter, will do a background non-interactive login, which succeeds only if the user has previously authorized your app and they are still logged into the Widgetic platform.
 
-You can use this form to reconnect to a users account upon page refresh.
+You can use this form to reconnect to a user's account upon page refresh.
 
 <aside class="info">To retry the authentication steps in the examples, remove the authorization for the Widgetic Documentation app from the <a target="_blank" href="https://widgetic.com/account/settings">settings</a> page.</aside>
 
@@ -298,7 +319,7 @@ Congratulations! You've created your first composition using the REST API. Here 
 
 This is a sample project showcasing the use of the Widgetic SDK to build a custom editor for a widget.
 
-Get the sourcecode at [https://github.com/widgetic/sample-custom-editor](https://github.com/widgetic/sample-custom-editor).
+Get the source code at [https://github.com/widgetic/sample-custom-editor](https://github.com/widgetic/sample-custom-editor).
 
 ## Building a custom CMS
 
@@ -306,4 +327,4 @@ Get the sourcecode at [https://github.com/widgetic/sample-custom-editor](https:/
 
 This is a sample project showcasing the use of the Widgetic SDK to build a custom CMS panel.
 
-Get the sourcecode at [https://github.com/widgetic/sample-quick-cms](https://github.com/widgetic/sample-quick-cms).
+Get the source code at [https://github.com/widgetic/sample-quick-cms](https://github.com/widgetic/sample-quick-cms).
