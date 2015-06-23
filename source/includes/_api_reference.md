@@ -15,7 +15,7 @@ JSON is returned in all responses.
 ## Introduction
 The Widgetic API is architected around REST, using standard HTTP verbs to communicate. All responses come in standard JSON.
 
-We also provide a Javascript SDK (Widgetic.js) that enables direct communication with the REST API, user authentication and authorization, and advanced manipulation of embedded widgets.
+We also provide a Javascript SDK ([Widgetic.js](https://github.com/widgetic/widgeticjs)) that enables direct communication with the REST API, user authentication and authorization, and advanced manipulation of embedded widgets.
 
 ## Getting an Application Key
 
@@ -34,11 +34,11 @@ Widgetic.init('<api key>','<redirect uri>');
 
 Widgetic uses API keys to allow access to the REST API. You can register a new app and get an API key at our [developer portal](https://widgetic.com/developers). 
 
-To interact with the REST API using the Widgetic.js SDK, it must first be initialized with your API key and Redirect URI. The API key is provided on the developer portal. The Redirect URI must point to a webpage on your domain that includes the widgetic.js SDK. This could be your homepage or an empty html page created for this purpose. The Redirect URI is used for authentication purposes.
+To interact with the REST API using the [Widgetic.js](https://github.com/widgetic/widgeticjs) SDK, it must first be initialized with your API key and Redirect URI. The API key is provided on the developer portal. The Redirect URI must point to a webpage on your domain that includes the Widgetic.js SDK. This could be your homepage or an empty html page created for this purpose. The Redirect URI is used for authentication purposes.
 
 ## Getting an Access Token for an User
 
-You can use Widgetic.js to connect your users to their Widgetic accounts. This allows you to access and manage their widgets and customizations, plus other features available through the API. The authentication and authorization protocol is based on OAuth2.
+You can use [Widgetic.js](https://github.com/widgetic/widgeticjs) to connect your users to their Widgetic accounts. This allows you to access and manage their widgets and customizations, plus other features available through the API. The authentication and authorization protocol is based on OAuth2.
 
 ### Interactive login 
 
@@ -141,7 +141,7 @@ To communicate with the REST API you use the `Widgetic.api` function.
 
 ## Widgetic.js
 
-Widgetic.js is our javascript SDK which enables advanced widget features (popups and overlays, in-place edit, responsiveness, and future functionality), user authentication, cross-domain REST api calls, and direct widget manipulation.
+[Widgetic.js](https://github.com/widgetic/widgeticjs) is our javascript SDK which enables advanced widget features (popups and overlays, in-place edit, responsiveness, and future functionality), user authentication, cross-domain REST api calls, and direct widget manipulation.
 
 ## User
 
