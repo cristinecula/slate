@@ -784,4 +784,24 @@ Delete an existing composition.
 
 <aside class="notice warning">The <code>DELETE</code> request does not validate if the composition is embedded. Embedded compositions will stop working. Be sure to remove all embeds before deleting a composition.</aside>
 
-<!-- TODO: add Errors section -->
+## Errors
+
+<!-- TODO: add info about error objects -->
+
+### HTTP Responses
+The API uses HTTP responses to indicate success or otherwise of API requests. The codes listed below are often used, and the API may use others. Note that 4xx and 5xx responses may be returned for any request and clients should cater for them.
+
+Response Code | Description
+--------------|------------
+400           | Bad Request – General client error, possibly malformed data.
+401           | Unauthorized – The API Key was not authorised (or no API Key was found).
+402           | Payment Required – The API is not available on your current plan.
+403           | Forbidden – The request is not allowed.
+404           | Not Found – The resource was not found.
+405           | Method Not Allowed – The resource does not accept the HTTP method.
+406           | Not Acceptable – The resource cannot return the client’s required content type.
+408           | Request Timeout – The server would not wait any longer for the client.
+409           | Conflict - the client is trying to update with a stale version or data.
+415           | Unsupported Media Type - The server doesn’t accept the submitted content-type.
+422           | Unprocessable Entity – The data was well-formed but invalid.
+500, 502, 503, 504 |  Server errors - something went wrong with Widgetic's servers.
