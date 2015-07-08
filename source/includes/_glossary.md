@@ -40,7 +40,7 @@ Utilities| chart, ticker, calendar, countdown timer, etc | text
 
 ## Editor
 
-A three steps panel which allows you to customize a widget by selecting a theme, adding content, editing the details and generating the associated code for embed.
+[A three steps panel](http://widgetic.uservoice.com/knowledgebase/articles/297070-using-the-editor) which allows you to customize a widget by selecting a theme, adding content, editing the details and generating the associated code for embed. 
 
 + Step 1: Customize Theme
 + Step 2: Add Content
