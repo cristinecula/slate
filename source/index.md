@@ -7,6 +7,7 @@ language_tabs:
 
 toc_footers:
   - <a href='mailto:support@widgetic.com'>Have questions? Contact us!</a>
+  - <a href='https://widgetic.com/developers/'>Start using the API</a>
 
 includes:
   - glossary
