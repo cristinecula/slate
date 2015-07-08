@@ -647,6 +647,13 @@ html, body {
 }
 
 @media (max-width: $phone-width) {
+  .live-example_wrapper {
+    position: relative;
+    width: 100%;
+    float: normal;
+    clear: right;
+  }
+
   .dark-box {
     display: none;
   }
