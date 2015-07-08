@@ -1,7 +1,7 @@
 # Resources
 
 ## Terms and Conditions
-You have to follow a [set of rules](https://widgetic.com/terms-of-service) and standard practices for using the Widgetic API. Failing to do so might result in your app being banned. 
+You have to follow a [set of rules](https://widgetic.com/api-terms-of-use) and standard practices for using the Widgetic API. Failing to do so might result in your app being banned. 
 
 <!-- TODO: add link -->
 
